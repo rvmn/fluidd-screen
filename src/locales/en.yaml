@@ -168,6 +168,7 @@ app:
       remove: Remove
       remove_all: Remove All
       rename: Rename
+      queue: Queue
       reprint: Re-Print
       reset_file: Clear File
       reset_layout: Reset to Default Layout
@@ -359,6 +360,8 @@ app:
         name: Name
         nozzle_diameter: Nozzle diameter
         print_duration: Print duration
+        time_added: Time Added To Queue
+        time_in_queue: Time In Queue
         size: Size
         slicer: Slicer
         slicer_version: Slicer version
@@ -380,6 +383,7 @@ app:
       fans_outputs: Fans & Outputs
       gcode_preview: Gcode Preview
       history: History
+      queue: Queue
       home: Home
       jobs: Jobs
       limits: Printer Limits
@@ -409,6 +413,10 @@ app:
       run_collector: Run collector
   history:
     msg:
+      confirm: Are you sure? This will clear all history, and printer statistics
+  queue:
+    msg:
+      confirm: Are you sure? This will clear the entire printer queue
       confirm_jobs: Are you sure? This will clear all jobs.
       confirm_stats: Are you sure? This will clear all stats.
   printer:
