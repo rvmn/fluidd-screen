@@ -1,12 +1,13 @@
 import { HistoryItem } from '@/store/history/types'
 
 export interface FilesState {
+  [key: string]: Files[] | FilesUpload[] | FileDownload | string[] | CurrentPaths | DiskUsage | Queue | null;
   uploads: FilesUpload[];
   download: FileDownload | null;
   currentPaths: CurrentPaths;
   disk_usage: DiskUsage;
   rootFiles: RootFiles;
-
+  queue: Queue;
   gcodes: Files[];
   config: Files[];
   config_examples: Files[];
@@ -14,7 +15,10 @@ export interface FilesState {
   logs: Files[];
   timelapse: Files[]; // may be null, but will never be accessed when feature is unsupported
 }
-
+export interface Queue {
+  status: string;
+  jobs: QueueJob[];
+}
 export interface DiskUsage {
   total: number;
   used: number;
@@ -39,7 +43,13 @@ export interface AppFile extends KlipperFile {
   size: number;
   path: string;
 }
-
+export interface QueueJob {
+  type: 'file';
+  time_added: number;
+  time_in_queue: number;
+  job_id: string;
+  filename: string;
+}
 export interface KlipperFile {
   filename: string;
   modified: number;

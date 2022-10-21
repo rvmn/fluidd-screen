@@ -73,6 +73,7 @@ export const handlePrintStateChange = (payload: any, state: any, dispatch: any) 
     'print_stats' in payload &&
     'state' in payload.print_stats
   ) {
+    SocketActions.jobQueueList()
     if (
       state.printer.printer.print_stats.state !== 'printing' &&
       payload.print_stats.state === 'printing'

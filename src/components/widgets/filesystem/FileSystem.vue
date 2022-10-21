@@ -67,6 +67,7 @@
       @preheat="handlePreheat"
       @preview-gcode="handlePreviewGcode"
       @view-thumbnail="handleViewThumbnail"
+      @enqueue="handleEnqueue"
     />
 
     <file-editor-dialog
@@ -290,6 +291,9 @@ export default class FileSystem extends Mixins(StateMixin, FilesMixin, ServicesM
     // load too.
     if (!val) {
       this.loadFiles(this.currentPath)
+      if (this.$store.getters['server/componentSupport']('job_queue')) {
+        SocketActions.jobQueueList()
+      }
     }
   }
 
@@ -887,6 +891,11 @@ export default class FileSystem extends Mixins(StateMixin, FilesMixin, ServicesM
         this.sendGcode(`M141 S${file.chamber_temp}`)
       }
     }
+  }
+
+  handleEnqueue (file: AppFileWithMeta) {
+    if (this.disabled) return
+    this.enqueueFile(file.filename, this.currentPath)
   }
 
   /**
